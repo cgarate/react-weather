@@ -2,7 +2,8 @@
 import styled from 'styled-components';
 import tachyons from 'styled-components-tachyons';
 
-export const Block = styled.div`
+export const Image = styled.img`
   ${tachyons}
 `;
-Block.displayName = "Block";
+
+Image.displayName = "Image";
