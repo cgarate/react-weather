@@ -3,9 +3,9 @@ import React from 'react';
 import { Card, Block, Image, H1, H2, H4, H5 } from '../../../../components';
 
 export const WeatherCard = ({
-  icon, 
-  location, 
-  currentWeatherDescription, 
+  icon,
+  location,
+  currentWeatherDescription,
   clickHandler,
   feelsLike,
   temp,
