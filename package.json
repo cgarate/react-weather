@@ -9,7 +9,9 @@
     "react": "^16.4.2",
     "react-content-loader": "^3.1.2",
     "react-dom": "^16.4.2",
+    "react-redux": "^5.1.0",
     "react-scripts": "1.1.5",
+    "redux": "^4.0.1",
     "styled-components": "^3.4.4",
     "styled-components-tachyons": "^0.0.5"
   },
@@ -21,6 +23,7 @@
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3"
+    "babel-core": "^6.26.3",
+    "redux-devtools": "^3.4.1"
   }
 }

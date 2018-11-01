@@ -56,7 +56,6 @@ export class WeatherInfo extends React.Component {
               error: response.message
             });
           } else {
-            console.log(response.data);
             this.setState({
               loadingData: false,
               weather: {
