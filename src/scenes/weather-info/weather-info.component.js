@@ -13,8 +13,11 @@ export class WeatherInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      citySelectorValue: "",
-      loadingData: false,
+      ui: {
+        citySelectorValue: "",
+        loadingData: false,
+        showHourlyData: false,
+      },
       weather: {
         current: {
           name: null,
@@ -29,7 +32,6 @@ export class WeatherInfo extends React.Component {
         },
       },
       error: null,
-      showHourlyData: false,
     };
     this.inputTextSearchHandler = this.inputTextSearchHandler.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
@@ -37,27 +39,31 @@ export class WeatherInfo extends React.Component {
   }
 
   weatherClickHandler(event) {
-    this.setState({ showHourlyData: true })
+    this.setState({ ui: { showHourlyData: true } })
   }
 
   inputTextSearchHandler(event) {
-    this.setState({ citySelectorValue: event.target.value });
+    this.setState({ ui: { citySelectorValue: event.target.value }});
   }
 
   submitHandler(event) {
     if ((event.type === 'keypress' && event.key === 'Enter') || event.type === 'click') {
-      this.setState({ loadingData: true, showHourlyData: false });
+      this.setState( { ui: { loadingData: true, showHourlyData: false } });
       axios
-        .get(BASIC_CITY_WEATHER_REQUEST + this.state.citySelectorValue)
+        .get(BASIC_CITY_WEATHER_REQUEST + this.state.ui.citySelectorValue)
         .then(response => {
           if (response.status !== 200) {
             this.setState({
-              loadingData: false,
+              ui: { loadingData: false },
               error: response.message
             });
           } else {
             this.setState({
-              loadingData: false,
+              ui: {
+                loadingData: false,
+                citySelectorValue: "",
+                showHourlyData: false,
+              },
               weather: {
                 current: {
                   name: response.data.name,
@@ -71,20 +77,19 @@ export class WeatherInfo extends React.Component {
                   sunset: response.data.sys.sunset,
                 }
               },
-              citySelectorValue: "",
               error: null
             });
           }
         })
         .catch(error => {
-          this.setState({ loadingData: false, error: error });
+          this.setState({ ui: { loadingData: false }, error: error });
         });
     }
   }
 
   render() {
     // The spinner
-    if (this.state.loadingData) {
+    if (this.state.ui.loadingData) {
       return <CircleLoader />;
     }
 

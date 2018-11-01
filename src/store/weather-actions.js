@@ -1,7 +1,17 @@
 
-import { SET_LOADING_CONTENT } from './weather-actions-type';
+import { SET_LOADING_CONTENT, SHOW_HOURLY_WEATHER, LOG_ERROR } from './weather-actions-type';
 
-export const contentLoaderOn = (setTo) => ({
+export const setContentLoader = (loadingDataStatus) => ({
   type: SET_LOADING_CONTENT,
-  setTo
+  loadingDataStatus: loadingDataStatus,
+})
+
+export const showHourlyWeather = (showHourlyWeather) = ({
+  type: SHOW_HOURLY_WEATHER,
+  showHourlyWeather: showHourlyWeather,
+})
+
+export const logError = (message) => ({
+  type: LOG_ERROR,
+  message
 })
