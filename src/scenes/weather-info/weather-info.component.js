@@ -7,7 +7,7 @@ import { WeatherCard, WeatherCardHourly } from './components';
 
 const BASE_API_URL = process.env.REACT_APP_API_URL;
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
-const BASIC_CITY_WEATHER_REQUEST = `${BASE_API_URL}/?key=${API_KEY}&num_of_days=1&format=json&q=`;
+const BASIC_CITY_WEATHER_REQUEST = `${BASE_API_URL}APPID=${API_KEY}&q=`;
 
 export class WeatherInfo extends React.Component {
   constructor(props) {
@@ -15,12 +15,18 @@ export class WeatherInfo extends React.Component {
     this.state = {
       citySelectorValue: "",
       loadingData: false,
-      weatherData: {
-        currentCondition: [],
-        currentConditionDescription: null,
-        currentConditionIcon: null,
-        hourly: [],
-        returnedPlace: null
+      weather: {
+        current: {
+          name: null,
+          conditions: [],
+          temp: null,
+          humidity: null,
+          tempMin: null,
+          tempMax: null,
+          datetime: null,
+          sunrise: null,
+          sunset: null,
+        },
       },
       error: null,
       showHourlyData: false,
@@ -44,22 +50,27 @@ export class WeatherInfo extends React.Component {
       axios
         .get(BASIC_CITY_WEATHER_REQUEST + this.state.citySelectorValue)
         .then(response => {
-          if (response.data.data.hasOwnProperty("error")) {
+          if (response.status !== 200) {
             this.setState({
               loadingData: false,
-              error: response.data.data.error[0].msg
+              error: response.message
             });
           } else {
+            console.log(response.data);
             this.setState({
               loadingData: false,
-              weatherData: {
-                hourly: [...response.data.data.weather[0].hourly],
-                currentCondition: { ...response.data.data.current_condition[0] },
-                currentConditionDescription:
-                  response.data.data.current_condition[0].weatherDesc[0].value,
-                currentConditionIcon:
-                  response.data.data.current_condition[0].weatherIconUrl[0].value,
-                returnedPlace: response.data.data.request[0].query
+              weather: {
+                current: {
+                  name: response.data.name,
+                  conditions: [...response.data.weather],
+                  temp: response.data.main.temp,
+                  humidity: response.data.main.humidity,
+                  tempMin: response.data.main.temp_min,
+                  tempMax: response.data.main.temp_max,
+                  datetime: response.data.dt,
+                  sunrise: response.data.sys.sunrise,
+                  sunset: response.data.sys.sunset,
+                }
               },
               citySelectorValue: "",
               error: null
@@ -79,7 +90,7 @@ export class WeatherInfo extends React.Component {
     }
 
     // Initial state when data has not been retrieved
-    if (!this.state.weatherData.hourly.length) {
+    if (this.state.weather.current.name === null) {
       return (
         <Main flex flex_column items_center justify_center pa3>
           <CitySelector
@@ -115,20 +126,18 @@ export class WeatherInfo extends React.Component {
             cityValue={this.state.citySelectorValue}
           />
           <WeatherCard
-            icon={this.state.weatherData.currentConditionIcon}
-            currentWeatherDescription={
-              this.state.weatherData.currentConditionDescription
+            currentConditions={
+              this.state.weather.current.conditions
             }
-            feelsLike={this.state.weatherData.currentCondition.FeelsLikeC}
-            temp={this.state.weatherData.currentCondition.temp_C}
-            humidity={this.state.weatherData.currentCondition.humidity}
-            location={this.state.weatherData.returnedPlace}
+            temp={this.state.weather.current.temp}
+            humidity={this.state.weather.current.humidity}
+            location={this.state.weather.current.name}
             clickHandler={this.weatherClickHandler}
           />
         </Block>
         <Block flex flex_wrap>
           {this.state.showHourlyData &&
-            this.state.weatherData.hourly.map((hour, i) => {
+            this.state.weather.current.hourly.map((hour, i) => {
               return (
                 <WeatherCardHourly
                   key={`hourlyWeather-${i}`}
