@@ -1,17 +1,72 @@
+import fetch from "cross-fetch";
 
-import { SET_LOADING_CONTENT, SHOW_HOURLY_WEATHER, LOG_ERROR } from './weather-actions-type';
+import {
+  LOG_ERROR,
+  SELECT_WEATHER_LOCATION,
+  REQUEST_WEATHER_DATA,
+  RECEIVE_WEATHER_DATA,
+  REQUEST_WEATHER_DATA_ERROR,
+  SAVE_WEATHER_INPUT_SEARCH_VALUE,
+} from "./weather-actions-type";
 
-export const setContentLoader = (loadingDataStatus) => ({
-  type: SET_LOADING_CONTENT,
-  loadingDataStatus: loadingDataStatus,
-})
+const BASE_API_URL = process.env.REACT_APP_API_URL;
+const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+const BASIC_CITY_WEATHER_REQUEST = `${BASE_API_URL}APPID=${API_KEY}&q=`;
 
-export const showHourlyWeather = (showHourlyWeather) = ({
-  type: SHOW_HOURLY_WEATHER,
-  showHourlyWeather: showHourlyWeather,
-})
-
-export const logError = (message) => ({
+export const logError = message => ({
   type: LOG_ERROR,
   message
+});
+
+export const requestWeatherData = location => ({
+  type: REQUEST_WEATHER_DATA,
+  location
+});
+
+export const receiveWeatherData = (json) => ({
+  type: RECEIVE_WEATHER_DATA,
+  data: {
+    conditions: [...json.weather],
+    name: json.name,
+    temp: json.main.temp,
+    humidity: json.main.humidity,
+    tempMin: json.main.temp_min,
+    tempMax: json.main.temp_max,
+    datetime: json.dt,
+    sunrise: json.sys.sunrise,
+    sunset: json.sys.sunset,
+  },
+  receivedAt: Date.now(),
+});
+
+export const receiveWeatherError = (location, error) => ({
+  type: REQUEST_WEATHER_DATA_ERROR,
+  error,
+  location
+});
+
+export const selectedWeatherLocation = (location) => ({
+  type: SELECT_WEATHER_LOCATION,
+  location
+});
+
+export const saveInputSearchValue = (value) => ({
+  type: SAVE_WEATHER_INPUT_SEARCH_VALUE,
+  inputTextValue: value,
 })
+
+//  Async actions
+export const fetchWeather = location => dispatch => {
+  dispatch(requestWeatherData(location))
+  return (
+    fetch(`${BASIC_CITY_WEATHER_REQUEST}${location}`)
+    .then(
+      (response) => response.json(),
+      (error) => dispatch(logError(error))
+    )
+    .then((json) => {
+      dispatch(receiveWeatherData(json));
+      dispatch(selectedWeatherLocation(location));
+    })
+  )
+}

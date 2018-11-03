@@ -6,14 +6,14 @@ import { WeatherConditionsRow } from "./weather-conditions-row";
 export const WeatherCard = ({
   location,
   currentConditions,
-  clickHandler,
+  // clickHandler,
   temp,
   humidity
 }) => {
   let urlWeatherIcon = "http://openweathermap.org/img/w/"; // The URL to get the icon for the current weather
   return (
     <Card
-      onClick={clickHandler}
+      // onClick={clickHandler}
       mw6
       center
       bg_white

@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@storybook/react": "^3.4.10",
-    "axios": "^0.18.0",
+    "cross-fetch": "^2.2.3",
     "dotenv": "^6.0.0",
     "react": "^16.4.2",
     "react-content-loader": "^3.1.2",
@@ -12,6 +12,7 @@
     "react-redux": "^5.1.0",
     "react-scripts": "1.1.5",
     "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "styled-components": "^3.4.4",
     "styled-components-tachyons": "^0.0.5"
   },
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
-    "redux-devtools": "^3.4.1"
+    "redux-devtools": "^3.4.1",
+    "redux-devtools-extension": "^2.13.5"
   }
 }

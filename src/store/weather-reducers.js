@@ -1,45 +1,83 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
-import { SET_LOADING_CONTENT, SHOW_HOURLY_WEATHER, LOG_ERROR } from './weather-actions-type';
+import {
+  LOG_ERROR,
+  REQUEST_WEATHER_DATA,
+  RECEIVE_WEATHER_DATA,
+  SELECT_WEATHER_LOCATION,
+  SAVE_WEATHER_INPUT_SEARCH_VALUE,
+} from "./weather-actions-type";
+
+const initialStateWeather = {
+  isFetching: false,
+  lastUpdated: "",
+  current: {
+    name: "",
+    conditions: [],
+    temp: "",
+    humidity: "",
+    tempMin: "",
+    tempMax: "",
+    datetime: "",
+    sunrise: "",
+    sunset: ""
+  }
+};
 
 const initialState = {
-  ui: {
-    loadingData: false,
-    showHourlyData: false,
-  },
-  weather: {
-    current: {},
-  },
+  weather: initialStateWeather,
   error: "",
-}
+  selectedLocation: "",
+  weatherInputTextValue: "",
+};
 
-const weatherUI = (state = initialState.ui, action) => {
-  switch (action.type) {
-    case SET_LOADING_CONTENT:
-      return { ...state, loadingData: action.loadingDataStatus }
-    case SHOW_HOURLY_WEATHER:
-      return { ...state, showHourlyData: action.showHourlyWeather }
-    default:
-      return state;
-  }
-}
-
-const logError = (state = initialState.error, action) => {
+const error = (state = initialState.error, action) => {
   switch (action.type) {
     case LOG_ERROR:
       return action.message;
     default:
       return state;
   }
+};
+
+const selectedLocation = (state = initialState.selectedLocation, action) => {
+  switch (action.type) {
+    case SELECT_WEATHER_LOCATION:
+      return action.location;
+    default:
+      return state;
+  }
+};
+
+const weatherInputTextValue = (state = initialState.weatherInputTextValue, action) => {
+  switch (action.type) {
+    case SAVE_WEATHER_INPUT_SEARCH_VALUE:
+      return action.inputTextValue;
+    default:
+      return state;
+  }
 }
 
+const weather = (state = initialStateWeather, action) => {
+  switch (action.type) {
+    case REQUEST_WEATHER_DATA:
+      return { ...state, isFetching: true };
+    case RECEIVE_WEATHER_DATA:
+      return {
+        isFetching: false,
+        lastUpdated: action.receivedAt,
+        current: action.data
+      };
+    default:
+      return state;
+  }
+};
+
 const weatherReducer = combineReducers({
-  logError,
-  weatherUI
-})
+  error,
+  weather,
+  selectedLocation,
+  weatherInputTextValue,
+});
 
 export default weatherReducer;
-
-
-
-
