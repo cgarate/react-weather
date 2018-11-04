@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 
 import {
-  LOG_ERROR,
   REQUEST_WEATHER_DATA,
   RECEIVE_WEATHER_DATA,
   SELECT_WEATHER_LOCATION,
   SAVE_WEATHER_INPUT_SEARCH_VALUE,
+  RECEIVE_WEATHER_DATA_ERROR
 } from "./weather-actions-type";
 
 const initialStateWeather = {
@@ -31,14 +31,17 @@ const initialState = {
   weatherInputTextValue: "",
 };
 
-const error = (state = initialState.error, action) => {
+const error = (state = initialState, action) => {
   switch (action.type) {
-    case LOG_ERROR:
-      return action.message;
+    case RECEIVE_WEATHER_DATA_ERROR:
+      return {
+        ...initialState,
+        error: action.message
+      }
     default:
-      return state;
+     return state;
   }
-};
+}
 
 const selectedLocation = (state = initialState.selectedLocation, action) => {
   switch (action.type) {
@@ -68,16 +71,22 @@ const weather = (state = initialStateWeather, action) => {
         lastUpdated: action.receivedAt,
         current: action.data
       };
+    case RECEIVE_WEATHER_DATA_ERROR:
+      return {
+        ...initialStateWeather,
+        isFetching: false,
+        lastUpdated: action.receivedAt,
+      }
     default:
       return state;
   }
 };
 
 const weatherReducer = combineReducers({
-  error,
   weather,
   selectedLocation,
   weatherInputTextValue,
+  error
 });
 
 export default weatherReducer;

@@ -26,11 +26,11 @@ export const WeatherInfo = (
     )
 
     // Initial state when data has not been retrieved
-    if (!!errorState.error) {
+    if (errorState.error) {
       return (
         <Main flex flex_column items_center justify_center pa3>
           {renderInputSearchBox()}
-          {(!!errorState.error ? <Error errorMessage={errorState.error} /> : null)}
+          {(errorState.error ? <Error errorMessage={errorState.error} /> : null)}
         </Main>
       );
     }

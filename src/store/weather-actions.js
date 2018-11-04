@@ -5,7 +5,7 @@ import {
   SELECT_WEATHER_LOCATION,
   REQUEST_WEATHER_DATA,
   RECEIVE_WEATHER_DATA,
-  REQUEST_WEATHER_DATA_ERROR,
+  RECEIVE_WEATHER_DATA_ERROR,
   SAVE_WEATHER_INPUT_SEARCH_VALUE,
 } from "./weather-actions-type";
 
@@ -39,9 +39,9 @@ export const receiveWeatherData = (json) => ({
   receivedAt: Date.now(),
 });
 
-export const receiveWeatherError = (location, error) => ({
-  type: REQUEST_WEATHER_DATA_ERROR,
-  error,
+export const receiveWeatherError = (location, message) => ({
+  type: RECEIVE_WEATHER_DATA_ERROR,
+  message,
   location
 });
 
@@ -65,8 +65,12 @@ export const fetchWeather = location => dispatch => {
       (error) => dispatch(logError(error))
     )
     .then((json) => {
-      dispatch(receiveWeatherData(json));
-      dispatch(selectedWeatherLocation(location));
+      if (!json.message) {
+        dispatch(receiveWeatherData(json));
+        dispatch(selectedWeatherLocation(location));
+      } else {
+        dispatch(receiveWeatherError(location, json.message));
+      }
     })
   )
 }

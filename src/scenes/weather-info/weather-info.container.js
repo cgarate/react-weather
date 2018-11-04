@@ -3,12 +3,7 @@ import { connect } from 'react-redux';
 import { saveInputSearchValue, fetchWeather } from '../../store/weather-actions';
 import { WeatherInfo } from './weather-info.component';
 
-
-const getCurrentErrorState = state => {
-  return ({
-    error: state.error,
-  })
-}
+const getCurrentErrorState = state => (state.error)
 
 const getCurrentWeatherConditions = (weatherConditions) => {
   const selectedWeatherConditions = [];
@@ -36,7 +31,7 @@ const mapStateToProps = state => ({
   basicWeatherData: getBasicWeatherData(state.weather.current),
   isFetching: state.weather.isFetching,
   weatherInputTextValue: state.weather.weatherInputTextValue,
-  errorState: getCurrentErrorState,
+  errorState: getCurrentErrorState(state),
 })
 
 const mapDispatchToProps = dispatch => ({
