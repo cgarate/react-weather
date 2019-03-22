@@ -1,12 +1,12 @@
 import fetch from "cross-fetch";
 
 import {
-  LOG_ERROR,
-  SELECT_WEATHER_LOCATION,
-  REQUEST_WEATHER_DATA,
-  RECEIVE_WEATHER_DATA,
-  RECEIVE_WEATHER_DATA_ERROR,
-  SAVE_WEATHER_INPUT_SEARCH_VALUE,
+  LOGGED_ERROR,
+  SELECTED_WEATHER_LOCATION,
+  REQUESTED_WEATHER_DATA,
+  RECEIVED_WEATHER_DATA,
+  RECEIVED_WEATHER_DATA_ERROR,
+  SAVED_WEATHER_INPUT_SEARCH_VALUE,
 } from "./weather-actions-type";
 
 const BASE_API_URL = process.env.REACT_APP_API_URL;
@@ -14,17 +14,17 @@ const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 const BASIC_CITY_WEATHER_REQUEST = `${BASE_API_URL}APPID=${API_KEY}&q=`;
 
 export const logError = message => ({
-  type: LOG_ERROR,
+  type: LOGGED_ERROR,
   message
 });
 
 export const requestWeatherData = location => ({
-  type: REQUEST_WEATHER_DATA,
+  type: REQUESTED_WEATHER_DATA,
   location
 });
 
 export const receiveWeatherData = (json) => ({
-  type: RECEIVE_WEATHER_DATA,
+  type: RECEIVED_WEATHER_DATA,
   data: {
     conditions: [...json.weather],
     name: json.name,
@@ -40,18 +40,18 @@ export const receiveWeatherData = (json) => ({
 });
 
 export const receiveWeatherError = (location, message) => ({
-  type: RECEIVE_WEATHER_DATA_ERROR,
+  type: RECEIVED_WEATHER_DATA_ERROR,
   message,
   location
 });
 
 export const selectedWeatherLocation = (location) => ({
-  type: SELECT_WEATHER_LOCATION,
+  type: SELECTED_WEATHER_LOCATION,
   location
 });
 
 export const saveInputSearchValue = (value) => ({
-  type: SAVE_WEATHER_INPUT_SEARCH_VALUE,
+  type: SAVED_WEATHER_INPUT_SEARCH_VALUE,
   inputTextValue: value,
 })
 
