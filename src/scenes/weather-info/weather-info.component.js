@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 import axios from "axios";
 
 import { CitySelector, CircleLoader, Error } from "../../widgets";
 import { Block, Main } from "../../components";
-import { WeatherCard, WeatherCardHourly } from './components';
+import { WeatherCard, WeatherCardHourly } from "./components";
 
 const BASE_API_URL = process.env.REACT_APP_API_URL;
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
@@ -20,7 +20,7 @@ export class WeatherInfo extends React.Component {
         currentConditionDescription: null,
         currentConditionIcon: null,
         hourly: [],
-        returnedPlace: null
+        returnedPlace: null,
       },
       error: null,
       showHourlyData: false,
@@ -31,7 +31,7 @@ export class WeatherInfo extends React.Component {
   }
 
   weatherClickHandler(event) {
-    this.setState({ showHourlyData: true })
+    this.setState({ showHourlyData: true });
   }
 
   inputTextSearchHandler(event) {
@@ -39,7 +39,10 @@ export class WeatherInfo extends React.Component {
   }
 
   submitHandler(event) {
-    if ((event.type === 'keypress' && event.key === 'Enter') || event.type === 'click') {
+    if (
+      (event.type === "keypress" && event.key === "Enter") ||
+      event.type === "click"
+    ) {
       this.setState({ loadingData: true, showHourlyData: false });
       axios
         .get(BASIC_CITY_WEATHER_REQUEST + this.state.citySelectorValue)
@@ -47,22 +50,25 @@ export class WeatherInfo extends React.Component {
           if (response.data.data.hasOwnProperty("error")) {
             this.setState({
               loadingData: false,
-              error: response.data.data.error[0].msg
+              error: response.data.data.error[0].msg,
             });
           } else {
             this.setState({
               loadingData: false,
               weatherData: {
                 hourly: [...response.data.data.weather[0].hourly],
-                currentCondition: { ...response.data.data.current_condition[0] },
+                currentCondition: {
+                  ...response.data.data.current_condition[0],
+                },
                 currentConditionDescription:
                   response.data.data.current_condition[0].weatherDesc[0].value,
                 currentConditionIcon:
-                  response.data.data.current_condition[0].weatherIconUrl[0].value,
-                returnedPlace: response.data.data.request[0].query
+                  response.data.data.current_condition[0].weatherIconUrl[0]
+                    .value,
+                returnedPlace: response.data.data.request[0].query,
               },
               citySelectorValue: "",
-              error: null
+              error: null,
             });
           }
         })
@@ -139,9 +145,8 @@ export class WeatherInfo extends React.Component {
                   windGust={hour.WindGustKmph}
                   weatherDescription={hour.weatherDesc[0].value}
                 />
-              )
-            })
-          }
+              );
+            })}
         </Block>
       </Main>
     );
