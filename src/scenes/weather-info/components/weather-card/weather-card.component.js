@@ -5,6 +5,7 @@ import { WeatherConditionsRow } from "./weather-conditions-row";
 
 export const WeatherCard = ({
   location,
+  country,
   currentConditions,
   // clickHandler,
   temp,
@@ -24,8 +25,8 @@ export const WeatherCard = ({
       ba
       b__black_10
     >
-      <Block flex>
-        <H1>{location}</H1>
+      <Block><H1>{location}, {country}</H1></Block>
+      <Block flex justify_around>
         {currentConditions.map((item, index) => {
           let icon = item.icon;
           let description = item.description;

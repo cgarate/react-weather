@@ -20,7 +20,7 @@ const store = createStore(
     applyMiddleware(...middleware),
   ));
 
-store.dispatch(fetchWeather('toronto')).then(() => console.log(store.getState()))
+store.dispatch(fetchWeather('guanajuato')).then(() => console.log(store.getState()))
 
 ReactDOM.render(
   <Provider store={store}>

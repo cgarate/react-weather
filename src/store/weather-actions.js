@@ -27,7 +27,6 @@ export const receiveWeatherData = (json) => ({
   type: RECEIVED_WEATHER_DATA,
   data: {
     conditions: [...json.weather],
-    name: json.name,
     temp: json.main.temp,
     humidity: json.main.humidity,
     tempMin: json.main.temp_min,
@@ -37,6 +36,8 @@ export const receiveWeatherData = (json) => ({
     sunset: json.sys.sunset,
   },
   receivedAt: Date.now(),
+  name: json.name,
+  country: json.sys.country,
 });
 
 export const receiveWeatherError = (location, message) => ({

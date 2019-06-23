@@ -26,11 +26,11 @@ export const WeatherInfo = (
     )
 
     // Initial state when data has not been retrieved
-    if (errorState.error) {
+    if (errorState.message) {
       return (
         <Main flex flex_column items_center justify_center pa3>
           {renderInputSearchBox()}
-          {(errorState.error ? <Error errorMessage={errorState.error} /> : null)}
+          {(errorState.message ? <Error errorMessage={errorState.message} /> : null)}
         </Main>
       );
     }
@@ -45,6 +45,7 @@ export const WeatherInfo = (
             temp={basicWeatherData.temp}
             humidity={basicWeatherData.humidity}
             location={basicWeatherData.location}
+            country={basicWeatherData.country}
             // clickHandler={this.weatherClickHandler}
           />
         </Block>
