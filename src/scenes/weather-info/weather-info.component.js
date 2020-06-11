@@ -7,7 +7,7 @@ import { WeatherCard, WeatherCardHourly } from "./components";
 
 const BASE_API_URL = process.env.REACT_APP_API_URL;
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
-const BASIC_CITY_WEATHER_REQUEST = `${BASE_API_URL}/?key=${API_KEY}&num_of_days=1&format=json&q=`;
+const BASIC_CITY_WEATHER_REQUEST = `${BASE_API_URL}?key=${API_KEY}&num_of_days=1&format=json&q=`;
 
 export class WeatherInfo extends React.Component {
   constructor(props) {
