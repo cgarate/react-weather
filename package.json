@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@storybook/react": "^5.3.19",
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
     "react": "^16.13.1",
@@ -21,7 +20,10 @@
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3"
+    "@babel/preset-react": "^7.10.1",
+    "@storybook/react": "^5.3.19",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.1.0"
   },
   "browserslist": {
     "production": [
