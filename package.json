@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@storybook/react": "^3.4.10",
-    "axios": "^0.18.1",
-    "dotenv": "^6.0.0",
-    "react": "^16.4.2",
-    "react-content-loader": "^3.1.2",
-    "react-dom": "^16.4.2",
-    "react-scripts": "1.1.5",
-    "styled-components": "^3.4.4",
+    "@storybook/react": "^5.3.19",
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "react": "^16.13.1",
+    "react-content-loader": "^5.0.4",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.1",
+    "styled-components": "^5.1.1",
     "styled-components-tachyons": "^0.0.5"
   },
   "scripts": {
