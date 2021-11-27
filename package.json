@@ -2,20 +2,6 @@
   "name": "weather",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@storybook/react": "^3.4.10",
-    "cross-fetch": "^2.2.3",
-    "dotenv": "^6.0.0",
-    "react": "^16.4.2",
-    "react-content-loader": "^3.1.2",
-    "react-dom": "^16.4.2",
-    "react-redux": "^5.1.0",
-    "react-scripts": "1.1.5",
-    "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0",
-    "styled-components": "^3.4.4",
-    "styled-components-tachyons": "^0.0.5"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -23,9 +9,33 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
+  "dependencies": {
+    "@storybook/react": "^6.4.0",
+    "cross-fetch": "^3.1.4",
+    "dot-env": "^0.0.1",
+    "react": "^17.0.2",
+    "react-content-loader": "^6.0.3",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
+    "react-scripts": "^4.0.3",
+    "redux-thunk": "^2.4.1",
+    "styled-components": "^5.3.3",
+    "styled-components-tachyons": "^0.0.5"
+  },
   "devDependencies": {
     "babel-core": "^6.26.3",
-    "redux-devtools": "^3.4.1",
-    "redux-devtools-extension": "^2.13.5"
+    "redux-devtools-extension": "^2.13.9"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
