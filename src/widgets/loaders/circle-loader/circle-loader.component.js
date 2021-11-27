@@ -9,8 +9,8 @@ import ContentLoader from 'react-content-loader'
 		height={160}
 		width={300}
 		speed={3}
-		primaryColor={primaryColor}
-		secondaryColor={secondaryColor}
+		backgroundColor={primaryColor}
+		foregroundColor={secondaryColor}
     style={{width: '100%', height: '10rem', margin: '3rem 0 0 0'}}
 	>
 		<circle cx="150" cy="80" r="80" />
