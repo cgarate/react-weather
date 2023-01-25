@@ -19,6 +19,7 @@ export const WeatherInfo = ({
         <CircleLoader />
       </Main>
     );
+
   }
 
   const renderInputSearchBox = () => (
@@ -57,3 +58,4 @@ export const WeatherInfo = ({
     </Main>
   );
 };
+

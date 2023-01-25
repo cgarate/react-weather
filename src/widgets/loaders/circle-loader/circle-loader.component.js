@@ -3,8 +3,8 @@ import ContentLoader from 'react-content-loader'
 
   export const CircleLoader = (
     {
-      primaryColor = '#f35184',
-      secondaryColor= '#ec8f76',
+      backgroundColor = '#f35184',
+      foregroundColor= '#ec8f76',
     }) => <ContentLoader
 		height={160}
 		width={300}

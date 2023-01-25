@@ -15,6 +15,7 @@ export const WeatherCard = ({
   return (
     <Card
       // onClick={clickHandler}
+
       mw6
       center
       bg_white
@@ -39,6 +40,7 @@ export const WeatherCard = ({
             />
           );
         })}
+
       </Block>
       <Block flex justify_around>
         <Block>
