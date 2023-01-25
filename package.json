@@ -2,16 +2,6 @@
   "name": "weather",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "axios": "^0.21.2",
-    "dotenv": "^8.2.0",
-    "react": "^16.13.1",
-    "react-content-loader": "^5.0.4",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1",
-    "styled-components": "^5.1.1",
-    "styled-components-tachyons": "^0.0.5"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -19,11 +9,24 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
+  "dependencies": {
+    "@storybook/react": "^6.5.15",
+    "cross-fetch": "^3.1.4",
+    "react": "^18.2.0",
+    "react-content-loader": "^6.2.0",
+    "react-dom": "^18.2.0",
+    "react-is": "^18.2.0",
+    "react-redux": "^8.0.5",
+    "react-scripts": "^5.0.1",
+    "redux": "^4.2.0",
+    "redux-thunk": "^2.4.2",
+    "styled-components": "^5.3.6",
+    "styled-components-tachyons": "^0.0.5"
+  },
   "devDependencies": {
-    "@babel/preset-react": "^7.10.1",
-    "@storybook/react": "^5.3.19",
+    "@redux-devtools/extension": "^3.2.5",
     "babel-core": "^6.26.3",
-    "babel-loader": "^8.1.0"
+    "babel-plugin-styled-components": "^2.0.7"
   },
   "browserslist": {
     "production": [
