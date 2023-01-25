@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-
 import "./styles/variables.css";
 import { Dashboard, WeatherInfoContainer } from "./scenes";
-require("dotenv").config();
+
 
 class App extends Component {
 

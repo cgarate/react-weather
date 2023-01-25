@@ -12,19 +12,21 @@
   "dependencies": {
     "@storybook/react": "^6.5.15",
     "cross-fetch": "^3.1.4",
-    "dot-env": "^0.0.1",
     "react": "^18.2.0",
     "react-content-loader": "^6.2.0",
     "react-dom": "^18.2.0",
+    "react-is": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-scripts": "^5.0.1",
+    "redux": "^4.2.0",
     "redux-thunk": "^2.4.2",
     "styled-components": "^5.3.6",
     "styled-components-tachyons": "^0.0.5"
   },
   "devDependencies": {
+    "@redux-devtools/extension": "^3.2.5",
     "babel-core": "^6.26.3",
-    "redux-devtools-extension": "^2.13.9"
+    "babel-plugin-styled-components": "^2.0.7"
   },
   "browserslist": {
     "production": [
